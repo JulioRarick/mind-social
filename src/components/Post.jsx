@@ -1,3 +1,5 @@
+import { Comment } from './Comment';
+
 import styles from './Post.module.css';
 
 export function Post() {
@@ -19,7 +21,7 @@ export function Post() {
             </time>
          </header>
          <div className={styles.content}>
-            <p>FHey guys!</p>
+            <p>Hey guys!</p>
             <p>
                I just uploaded a project to my portfolio. It is a project I made
                using React.js.
@@ -39,6 +41,11 @@ export function Post() {
                <button type='submit'>Publish</button>
             </footer>
          </form>
+         <div className={styles.commentList}>
+            <Comment />
+            <Comment />
+            <Comment />
+         </div>
       </article>
    );
 }
