@@ -1,36 +1,42 @@
+/* eslint-disable react/jsx-key */
+/* eslint-disable react/prop-types */
+import { format, formatDistanceToNow } from 'date-fns';
+
 import { Comment } from './Comment';
 import { Avatar } from './Avatar';
 
 import styles from './Post.module.css';
 
-export function Post() {
+export function Post({ author, publishedAt, content }) {
+   const publishedDateFormatted = format(publishedAt, "LLLL Do 'at' h:mm");
+   const publishedRelativeToNow = formatDistanceToNow(publishedAt, {
+      addSuffix: true,
+   });
    return (
       <article className={styles.post}>
          <header>
             <div className={styles.author}>
-               <Avatar src='https://github.com/JulioRarick.png' />
+               <Avatar src={author.avatarUrl} />
                <div className={styles.authorInfo}>
-                  <strong>Júlio Rarick</strong>
-                  <span>Web Developer</span>
+                  <strong>{author.name}</strong>
+                  <span>{author.role}</span>
                </div>
             </div>
-            <time title='June 9th at 9:50pm' dateTime='2024-06-09 09:50:00pm'>
-               Published 1 hour ago
+            <time
+               title={publishedDateFormatted}
+               dateTime={publishedAt.toISOString()}
+            >
+               {publishedRelativeToNow}
             </time>
          </header>
          <div className={styles.content}>
-            <p>Hey guys!</p>
-            <p>
-               I just uploaded a project to my portfolio. It is a project I made
-               using React.js.
-            </p>
-            <p>
-               <a href=''>juliorarick.com/mind-social</a>
-            </p>
-            <p>
-               <a href=''>#newproject</a> <a href=''>#react </a>{' '}
-               <a href=''>#portfolio</a>{' '}
-            </p>
+            {content.map((item) => {
+               if (item.type === 'paragraph') {
+                  return <p>{item.content}</p>;
+               } else if (item.type === 'link') {
+                  return <a href=''>{item.content}</a>;
+               }
+            })}
          </div>
          <form className={styles.commentForm}>
             <strong>Leave your feedback</strong>
