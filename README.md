@@ -1,5 +1,7 @@
 # MindSocial
 
+![mindSocialPrint](./src/assets/image.png)
+
 ## Project Description
 
 MindSocial is a web application developed in React.js with the aim of simulating a social network feed. This project was created to enhance my knowledge in React, CSS Modules, and JavaScript.
